@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package service;
+
+// Add request message type
+message AddRequest {
+  int64 X = 1;
+  int64 Y = 2;
+}
+
+message AddResponse {
+  int64 Answer = 1;
+}
+
+// Sqaure Root message types
+message SqrtRequest {
+  double X = 1;
+}
+
+message SqrtResponse {
+  double Answer = 1;
+}
+
+service MathOpService {
+  rpc Add(AddRequest) returns (AddResponse);
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse);
+}

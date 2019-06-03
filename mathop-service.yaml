@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mathop-service-deployment
+  labels:
+    app: mathOp-service
+spec:
+  selector:
+    matchLabels:
+      app: mathOp-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mathOp-service
+    spec:
+      containers:
+        - name: mathOp-service
+          image: bigrewal/mathop-service:v1.0
+          ports:
+            - name: mathOp-service
+              containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mathOp-service
+spec:
+  selector:
+    app: mathOp-service
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30080
+  type: NodePort
